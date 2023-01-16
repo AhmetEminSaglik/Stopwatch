@@ -22,7 +22,6 @@ class StopwatchTest {
                 .plusHours(hour)
                 .plusMinutes(minute)
                 .plusSeconds(second);
-
     }
 
     @Test
@@ -36,7 +35,6 @@ class StopwatchTest {
         String actualTimeString = stopwatch.getElapsedTimeString();
         String msg = "8 second is passed";
         assertEquals(expectedTimeString, actualTimeString, msg);
-
 
     }
 
@@ -64,7 +62,7 @@ class StopwatchTest {
         int expectedSecond = 0;
         int actualSecond = stopwatch.getElapsedTimeWithTimeStamp().toLocalDateTime().getHour();
         msg = "3 Seconds are elapsed";
-        assertEquals(expectedHour, actualHour, msg);
+        assertEquals(expectedSecond, actualSecond, msg);
     }
 
     @Test
@@ -85,10 +83,10 @@ class StopwatchTest {
         int actualMinute = elapsedTime.toLocalDateTime().getMinute();
         msg = "0 Minute is elapsed.";
         assertEquals(expectedMinute, actualMinute, msg);
-        int expected = 1;
-        int actual = elapsedTime.toLocalDateTime().getSecond();
+        int expectedSecond = 1;
+        int actualSecond = elapsedTime.toLocalDateTime().getSecond();
         msg = "1 Second is elapsed.";
-        assertEquals(expected, actual, msg);
+        assertEquals(expectedSecond, actualSecond, msg);
     }
 
     @Test
@@ -139,8 +137,6 @@ class StopwatchTest {
         int actualSecond = elapsedTime.toLocalDateTime().getSecond();
         msg = "10 Seconds are elapsed.";
         assertEquals(expectedSecond, actualSecond, msg);
-
-
     }
 
     @Test
