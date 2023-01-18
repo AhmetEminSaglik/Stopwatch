@@ -4,7 +4,18 @@ import java.sql.Timestamp;
 
 public class StopwatchUtility {
     public static Timestamp getTimeDiff(Timestamp start, Timestamp end) {
-        long diff = end.getTime() - start.getTime() - (2 * 60 * 60 * 1000);
+        long diff = 0;
+        try {
+            diff = end.getTime() - start.getTime() - (2 * 60 * 60 * 1000);
+        } catch (NullPointerException e) {
+            String parameter;
+            if (start == null) {
+                parameter = "start";
+            } else {
+                parameter = "end";
+            }
+            throw new ImproperUseOfStopwatchException(parameter);
+        }
         return new Timestamp(diff);
     }
 

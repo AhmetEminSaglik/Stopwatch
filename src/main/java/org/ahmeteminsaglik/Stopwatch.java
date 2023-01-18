@@ -18,19 +18,22 @@ public class Stopwatch {
     }
 
     public String getElapsedTimeString() {
+        String time = null;
         Timestamp diffTimeStamp = StopwatchUtility.getTimeDiff(timestampStart, timestampStop);
-        String time = StopwatchUtility.getTime(diffTimeStamp);
+        time = StopwatchUtility.getTime(diffTimeStamp);
         time = StopwatchUtility.fixMillisecond(time);
+
         return time;
     }
 
     public Timestamp getElapsedTimeWithTimeStamp() {
-        Timestamp diffTimeStamp;
+        Timestamp diffTimeStamp = null;
         try {
             diffTimeStamp = StopwatchUtility.getTimeDiff(timestampStart, timestampStop);
             String time = StopwatchUtility.getTime(diffTimeStamp);
             time = StopwatchUtility.fixMillisecond(time);
             diffTimeStamp = new Timestamp(dateFormat.parse(time).getTime());
+
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -52,4 +55,5 @@ public class Stopwatch {
     public void setTimestampStop(Timestamp timestampStop) {
         this.timestampStop = timestampStop;
     }
+
 }

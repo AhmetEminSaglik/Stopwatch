@@ -1,6 +1,6 @@
 package org.ahmeteminsaglik;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,8 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class StopwatchTest {
     static Stopwatch stopwatch;
 
-    @BeforeAll
-    static void prepareStopwatch() {
+    @BeforeEach
+    void prepareStopwatch() {
         stopwatch = new Stopwatch();
     }
 
@@ -187,5 +187,45 @@ class StopwatchTest {
         int actualSecond = elapsedTime.toLocalDateTime().getSecond();
         msg = "55 Seconds are elapsed.";
         assertEquals(expectedSecond, actualSecond, msg);
+    }
+
+    @Test
+    @DisplayName("getElapsedTime() without start and stop Time")
+    void testGetElapsedTimeInStringFormatWithouStartTime() {
+        Exception exception = assertThrows(ImproperUseOfStopwatchException.class, () -> {
+            stopwatch.getElapsedTimeString();
+        });
+        String expectedErrMsg = "start parameter is null in Stopwatch Object. Be sure startTime() and stopTime() functions are used.";
+        String actualErrMsg = exception.getMessage();
+        assertEquals(expectedErrMsg, actualErrMsg);
+
+        stopwatch.startTime();
+        exception = assertThrows(ImproperUseOfStopwatchException.class, () -> {
+            stopwatch.getElapsedTimeString();
+        });
+        expectedErrMsg = "end parameter is null in Stopwatch Object. Be sure startTime() and stopTime() functions are used.";
+        actualErrMsg = exception.getMessage();
+        assertEquals(expectedErrMsg, actualErrMsg);
+
+
+    }
+
+    @Test
+    @DisplayName("getElapsedTimeWithTimeStamp() without start and stop Time")
+    void testGetElapsedTimeInTimestampFormatWithouStartTime() {
+        Exception exception = assertThrows(ImproperUseOfStopwatchException.class, () -> {
+            stopwatch.getElapsedTimeWithTimeStamp();
+        });
+        String expectedErrMsg = "start parameter is null in Stopwatch Object. Be sure startTime() and stopTime() functions are used.";
+        String actualErrMsg = exception.getMessage();
+        assertEquals(expectedErrMsg, actualErrMsg);
+
+        stopwatch.startTime();
+        exception = assertThrows(ImproperUseOfStopwatchException.class, () -> {
+            stopwatch.getElapsedTimeWithTimeStamp();
+        });
+        expectedErrMsg = "end parameter is null in Stopwatch Object. Be sure startTime() and stopTime() functions are used.";
+        actualErrMsg = exception.getMessage();
+        assertEquals(expectedErrMsg, actualErrMsg);
     }
 }
