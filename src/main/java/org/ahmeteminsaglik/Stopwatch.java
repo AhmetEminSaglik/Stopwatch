@@ -56,4 +56,8 @@ public class Stopwatch {
         this.timestampStop = timestampStop;
     }
 
+    @Override
+    public String toString() {
+        return "Stopwatch{Elapsed Time : " + getElapsedTimeString() + '}';
+    }
 }
